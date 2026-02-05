@@ -15,8 +15,6 @@ $ perl bin/deploy.pl
 
 #### Step 2: START
 
-<br>
-
 ```bash
 $ perl app.pl
 ```
