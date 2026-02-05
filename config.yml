@@ -1,0 +1,14 @@
+logger: "console"
+log: "core"
+show_errors: 1
+startup_info: 1
+template: "template_toolkit"
+
+# Plugin Settings
+plugins:
+  "DBIC::Async":
+    default:
+      schema_class: "MyApp::Schema"
+      dsn: "dbi:SQLite:dbname=contacts.db"
+      async:
+        workers: 4

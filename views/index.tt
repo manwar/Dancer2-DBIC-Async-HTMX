@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Async Contact Manager</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <h1>Contact Manager</h1>
+
+    <form hx-post="/contacts"
+      hx-target="#contact-list"
+      hx-swap="innerHTML"
+      onaddcontact="this.reset()">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <button type="submit">Add Contact</button>
+    </form>
+
+    <hr>
+
+    <div class="search-box">
+        <input type="text"
+            name="q"
+            placeholder="Search contacts..."
+            hx-get="/contacts"
+            hx-target="#contact-list"
+            hx-trigger="keyup changed delay:500ms"
+            hx-indicator=".loader">
+        <span class="loader htmx-indicator">Searching...</span>
+    </div>
+
+    <h2>Active Contacts (<span id="total-count">0</span>)</h2>
+    <div id="contact-list" hx-get="/contacts" hx-trigger="load">
+        Loading contacts...
+    </div>
+</body>
+</html>
