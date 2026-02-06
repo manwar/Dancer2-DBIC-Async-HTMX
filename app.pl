@@ -33,6 +33,21 @@ get '/contacts' => sub {
     my $contacts = $search_f->get;
     my $total    = $count_f->get;
 
+    # Choice #1
+    #
+    # my $schema  = async_db('default');
+    # my $futures = $schema->run_parallel(
+    #    sub { async_search('Contact', $cond, 'default') },
+    #    sub { async_count('Contact', 'default') },
+    # );
+    # my ($contacts, $total) = $schema->await_all($futures);
+
+    # Choice #2
+    #
+    # my $search_f = async_search('Contact', $cond, 'default');
+    # my $count_f  = async_count('Contact', 'default');
+    # my ($contacts, $total) = async_db('default')->await_all($search_f, $count_f);
+
     my $html = '<ul class="list-group shadow-sm">';
     if (@$contacts) {
         foreach my $c (@$contacts) {
